@@ -9,7 +9,7 @@ As learned knowledge, the pre-trained parameters of DNNs act as a closer initial
 
 Specifically, we first calculate the parameter distance $D(\theta_r, \theta_B)$ and $D(\theta_A, \theta_B)$, where $\theta_r$ is the random initialization, $\theta_A$ and $\theta_B$ are the convergence points on pre-training task $A$ and downstream task $B$. The transferability of pre-trained $\theta_A$ on task $B$ is $T_B(\theta_A) = D(\theta_r, \theta_B)/D(\theta_A, \theta_B)$ (left in the following figure). To avoid the parameter scale problem in different layers, we calculate the transferability for all layers and regard the mean value as the transferability of the whole DNN (right in the following figure).
 
-<img src="https://github.com/Schuture/Transferability-of-Pre-trained-DNNs/blob/main/Figs/method.png" width = "800" height = "250" alt="Method" align=center />
+<img src="Figs/method.png" width = "800" height = "250" alt="Method" align=center />
 
 ### 2. Step by Step Implementation
 
