@@ -64,7 +64,7 @@ $log(\hat{T}_{FB}(\theta_A)) =-0.02 \mathcal{G} - 0.14 \mathcal{W} - 0.80 log(\m
 
 ## 4. Finding: most of the layer-wise transferabilities are not decreasing
 
-<img src="Figs/layer_wise_transferability.png" width = "1000" height = "350" alt="Layer-wise transferability" align=center />
+<img src="Figs/layer_wise_transferability.png" width = "1000" height = "300" alt="Layer-wise transferability" align=center />
 
 
 ## 5. Environment
