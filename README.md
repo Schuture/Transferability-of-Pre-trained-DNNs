@@ -13,17 +13,20 @@ Specifically, we first calculate the parameter distance $D(\theta_r, \theta_B)$ 
 
 ## 2. Step by Step Implementation
 
-(1) Pre-train a DNN (*e.g.*, resnet) on a large dataset (*e.g.*, ImageNet), and save the initialization parameters and converged parameters.
+(1) Pre-train a DNN (*e.g.*, resnet) on a large dataset (*e.g.*, ImageNet), and save the initialization parameters and converged parameters as random_init_model.pth and ImageNet_model.pth, respectively.
 
 ```
-python pretrain_on_ImageNet.py --seed 0 --max_epoch 120 --batch_size 256 --lr 0.1 --weight_decay 1e-4
+python pretrain_on_ImageNet.py --seed 0 --data_dir <your ImageNet directory> --max_epoch 120\
+                               --batch_size 256 --lr 0.1 --weight_decay 1e-4\
+                               -r random_init_model.pth -a ImageNet_model.pth
 ```
 
-(2) Fine-tune the pre-trained DNN on a downstream task (*e.g.*, CIFAR-10), and save the converged parameters.
+(2) Fine-tune the pre-trained DNN on a downstream task (*e.g.*, CIFAR-10), and save the converged parameters (*e.g.*, cifar10_model_lr001.pth).
 
 ```
-python finetune.py --dataset CIFAR-10 --data_dir <your data directory> -a <your pre-trained state dict>\
-                   --max_epoch 100 --batch_size 18 --lr 0.01 --weight_decay 1e-4
+python finetune.py --dataset CIFAR-10 --data_dir <your data directory>\
+                   -a ImageNet_model.pth -b cifar10_model_lr001.pth --max_epoch 100\
+                   --batch_size 18 --lr 0.01 --weight_decay 1e-4
 ```
 
 (3) Calculate the layer-wise and overall transferability of the DNN.
