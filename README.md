@@ -13,7 +13,7 @@ Specifically, we first calculate the parameter distance $D(\theta_r, \theta_B)$ 
 
 ## 2. Step by Step Implementation
 
-(1) Pre-train a DNN (*e.g.*, resnet) on a large dataset (*e.g.*, ImageNet), and save the initialization parameters and converged parameters as random_init_model.pth and ImageNet_model.pth, respectively.
+(1) Pre-train a DNN (*e.g.*, resnet) on a large dataset (*e.g.*, ImageNet), and save the initialization parameters and converged parameters as random_init_model.pth and ImageNet_model.pth, respectively. For your convenience, these model parameters can be found in the folder "ckpt".
 
 ```
 python pretrain_on_ImageNet.py --seed 0 --data_dir <your ImageNet directory> --max_epoch 120\
@@ -29,7 +29,7 @@ python finetune.py --dataset CIFAR-10 --data_dir <your data directory>\
                    --batch_size 18 --lr 0.01 --weight_decay 1e-4
 ```
 
-(3) Calculate the layer-wise and overall transferability of the DNN.
+(3) Calculate the layer-wise and overall transferability of the DNN. You can also find the three checkpoints in the folder "ckpt" for fast reproducing.
 
 ```
 python cal_transferability.py -r random_init_model.pth\
