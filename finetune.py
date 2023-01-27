@@ -14,6 +14,7 @@ import torch.optim as optim
 
 from datasets import ImageDataset  # For image datasets other than CIFAR
 
+
 def set_seed(seed=1):
     random.seed(seed)
     np.random.seed(seed)
@@ -110,7 +111,7 @@ def main():
             total_val = 0.
             loss_val = 0.
             net.eval()
-            with torch.no_grad(): # does not need gradient, faster
+            with torch.no_grad():
                 for j, data in enumerate(valid_loader):
                     # forward
                     inputs, labels = data
@@ -134,8 +135,8 @@ def main():
                 print("Valid:\t Epoch[{:0>3}/{:0>3}] Iteration[{:0>3}/{:0>3}] Loss: {:.4f} Acc:{:.2%}\n".format(
                     epoch, args.max_epoch, j+1, len(valid_loader), loss_val, acc))
 
-    torch.save(best_model.state_dict(), '{}_model.pth'.format(args.dataset))
-    print('\nThe model has been saved as {}_model.pth'.format(args.dataset))
+    torch.save(best_model.state_dict(), args.b)
+    print('\nThe model has been saved as {}'.format(args.b))
     print('\nTraining finish, the time consumption of {} epochs is {}s\n'.format(args.max_epoch, round(time.time() - start)))
     print('The max validation accuracy is: {:.2%}, reached at epoch {}.\n'.format(max_acc, reached))
 
@@ -147,6 +148,7 @@ if __name__ == '__main__':
     parser.add_argument('--dataset', type=str, default='CIFAR-10')
     parser.add_argument('--data_dir', type=str, default='')
     parser.add_argument('-a', type=str, default='', help='Model pretrained on task A')
+    parser.add_argument('-b', type=str, default='', help='Model finetuned on task B')
     parser.add_argument('--max_epoch', type=int, default=100)
     parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--lr', type=float, default=0.01)

@@ -1,3 +1,4 @@
+import os
 import time
 import copy
 import random
@@ -12,6 +13,7 @@ import torchvision.models as models
 import torch.optim as optim
 
 from datasets import ImageNetDataset
+
 
 def set_seed(seed=1):
     random.seed(seed)
@@ -37,15 +39,15 @@ def main():
         transforms.Normalize(mean=[0.5,0.5,0.5], std=[0.225,0.225,0.225])
     ])
 
-    train_data = ImageNetDataset('/home/sribd/Documents/数据集/ILSVRC2012_img_train_224', transform=train_transform)
-    valid_data = ImageNetDataset('/home/sribd/Documents/数据集/ILSVRC2012_img_val_224', transform=valid_transform)
+    train_data = ImageNetDataset(os.path.join(args.data_dir, 'ILSVRC2012_img_train_224'), transform=train_transform)
+    valid_data = ImageNetDataset(os.path.join(args.data_dir, 'ILSVRC2012_img_val_224'), transform=valid_transform)
     
     train_loader = DataLoader(dataset=train_data, batch_size=args.batch_size, num_workers=8, shuffle=True)
     valid_loader = DataLoader(dataset=valid_data, batch_size=args.batch_size, num_workers=8)
 
     # ============================ step 2/5 define the model ============================
     net = models.resnet50(pretrained=False)
-    torch.save(net.state_dict(), 'random_init_model.pth')
+    torch.save(net.state_dict(), args.r)
     net = net.to(device)
 
     # ============================ step 3/5 define the loss function ====================
@@ -127,11 +129,10 @@ def main():
                     max_acc = acc
                     reached = epoch
                     best_model = copy.deepcopy(net)
-                torch.save(net.state_dict(), 'ImageNet_{}epoch_model.pth'.format(epoch))
                 print("Valid:\t Epoch[{:0>3}/{:0>3}] Iteration[{:0>3}/{:0>3}] Loss: {:.4f} Acc:{:.2%}\n".format(
                     epoch, args.max_epoch, j+1, len(valid_loader), loss_val, acc))
 
-    torch.save(best_model.state_dict(), 'ImageNet_best_model.pth')
+    torch.save(best_model.state_dict(), args.a)
     print('\nTraining finish, the time consumption of {} epochs is {}s\n'.format(args.max_epoch, round(time.time() - start)))
     print('The max validation accuracy is: {:.2%}, reached at epoch {}.\n'.format(max_acc, reached))
 
@@ -140,6 +141,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Pre-training')
     
     parser.add_argument('--seed', type=int, default=0)
+    parser.add_argument('--data_dir', type=str, default='')
+    parser.add_argument('-r', type=str, default='', help='Random initialized model')
+    parser.add_argument('-a', type=str, default='', help='Model pretrained on task A')
     parser.add_argument('--max_epoch', type=int, default=120)
     parser.add_argument('--batch_size', type=int, default=256)
     parser.add_argument('--lr', type=float, default=0.1)
