@@ -1,6 +1,6 @@
 # Measuring the Transferability of Pre-trained DNNs
 
-This is the repository of paper "Rethinking Two Consensuses of Transferability of Pre-trained Deep Neural Networks", which is under review in ICML 2023.
+This is the repository of the paper "Rethinking Two Consensuses of Transferability of Pre-trained Deep Neural Networks", under review in AAAI2024.
 In this repo, we implement the PyTorch codes and examples for measuring pre-trained DNNs' transferability on downstream tasks.
 
 ## 1. Brief Introduction to this Method
@@ -11,7 +11,7 @@ Specifically, we first calculate the parameter distance $D(\theta_r, \theta_B)$ 
 
 <img src="Figs/method.png" width = "800" height = "250" alt="Method" align=center />
 
-## 2. Step by Step Implementation
+## 2. Step-by-Step Implementation
 
 (1) Pre-train a DNN (*e.g.*, resnet) on a large dataset (*e.g.*, ImageNet), and save the initialization parameters and converged parameters as random_init_model.pth and ImageNet_model.pth, respectively. For your convenience, these model parameters can be found in the folder "ckpt".
 
