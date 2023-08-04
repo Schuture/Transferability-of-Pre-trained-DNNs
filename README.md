@@ -44,28 +44,41 @@ Layer-wise transferability:  [3.44, 7.76, 8.59, 7.3, 5.42, 9.2, 6.1, 5.52, 4.23,
 <img src="Figs/transferability.png" width = "500" height = "350" alt="Layer-wise transferability" align=center />
 
 
-## 3. Finding: domain gap only has small effect on transferability
+## 3. Finding: domain gap only has a smaller effect on transferability than downstream intraclass variance and data amount
 
-Dataset | Domain gap | Domain width | Data amount | Transferability $T_{FB}(\theta_A)$
+Dataset | Domain gap | Intraclass variance | Data amount | Transferability $T_{FB}(\theta_A)$
 ---  |:---------:|:---------:|:---------:|:---------:
-CIFAR-10 | 2.27 | 186.0 | 50,000 | 7.79 |
-CIFAR-100 | 2.39 | 242.9 | 50,000 | 5.59 |
-Caltech-101 | 0.63 | 385.0 | 3,060 | 23.92 |
-CUB-200 | 1.62 | 220.0 | 5,994 | 21.96 |
-Aircraft | 2.95 | 114.6 | 6,667 | 12.45 |
-Flowers | 1.64 | 145.3 | 1,088 | 106.30 |
-Land Use | 1.89 | 181.2 | 1,680 | 39.09 |
-POCUS | 13.12 | 46.9 | 1,692 | 53.58 |
-DTD | 0.74 | 822.3 | 1,880 | 24.15 |
-DomainNet-r | 1.45 | 467.7 | 120,906 | 6.32 |
-DomainNet-p | 0.47 | 455.5 | 50,416 | 7.12 |
-DomainNet-c | 6.56 | 823.2 | 33,525 | 8.91 |
-
+CIFAR-10 | 2.27 | 0.665 | 50,000 | 7.79 |
+CIFAR-100 | 2.39 | 0.075 | 50,000 | 5.59 |
+Caltech-101 | 0.63 | 0.087 | 3,060 | 23.92 |
+CUB-200 | 1.62 | 0.042 | 5,994 | 21.96 |
+Aircraft | 2.95 | 0.064 | 6,667 | 12.45 |
+Flowers | 1.64 | 0.449 | 1,088 | 106.30 |
+Land Use | 1.89 | 0.364 | 1,680 | 39.09 |
+POCUS | 13.12 | 1.200 | 1,692 | 53.58 |
+DTD | 0.74 | 0.213 | 1,880 | 24.15 |
+DomainNet-r | 0.027 | 467.7 | 120,906 | 6.32 |
+DomainNet-p | 0.027 | 455.5 | 50,416 | 7.12 |
+DomainNet-c | 0.027 | 823.2 | 33,525 | 8.91 |
+           
 Multiple regression gives the following relationship, showing that the domain gap has only a weak correlation with transferability, while the data diversity and amount of the downstream task have more significant effects:
 
-$log(\hat{T}_{FB}(\theta_A)) =-0.02 \mathcal{G} - 0.14 \mathcal{W} - 0.80 log(\mathcal{N}) + 2.86$
+ResNet50: 
+$log(\hat{T}_{FB}(\theta_A)) =-0.26 \mathcal{G} + 0.32 \mathcal{D} - 0.61 log(\mathcal{N}) + 2.86$
+
+ResNet34: 
+$log(\hat{T}_{FB}(\theta_A)) =-0.15 \mathcal{G} + 0.25 \mathcal{D} - 0.64 log(\mathcal{N}) + 2.31$
+
+DenseNet121: 
+$log(\hat{T}_{FB}(\theta_A)) =-0.14 \mathcal{G} + 0.28 \mathcal{D} - 0.71 log(\mathcal{N}) + 2.76$
+
+ViT small: 
+$log(\hat{T}_{FB}(\theta_A)) =-0.01 \mathcal{G} + 0.08 \mathcal{D} - 0.85 log(\mathcal{N}) + 2.76$
+
 
 ## 4. Finding: most of the layer-wise transferabilities are not decreasing
+
+For ResNet50:
 
 <img src="Figs/layer_wise_transferability.png" width = "1000" height = "300" alt="Layer-wise transferability" align=center />
 
