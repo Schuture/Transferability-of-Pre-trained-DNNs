@@ -44,9 +44,9 @@ Layer-wise transferability:  [3.44, 7.76, 8.59, 7.3, 5.42, 9.2, 6.1, 5.52, 4.23,
 <img src="Figs/transferability.png" width = "500" height = "350" alt="Layer-wise transferability" align=center />
 
 
-## 3. Finding: domain gap only has a smaller effect on transferability than downstream intraclass variance and data amount
+## 3. Finding: domain gap only has a smaller effect on transferability than the downstream intraclass variance and data amount
 
-Dataset | Domain gap | Intraclass variance | Data amount | Transferability $T_{FB}(\theta_A)$
+Dataset | Domain gap $\mathcal{G}$ | Intraclass variance $\mathcal{D}$ | Data amount $\mathcal{N}$ | Transferability $T_{FB}(\theta_A)$
 ---  |:---------:|:---------:|:---------:|:---------:
 CIFAR-10 | 2.27 | 0.665 | 50,000 | 7.79 |
 CIFAR-100 | 2.39 | 0.075 | 50,000 | 5.59 |
@@ -80,8 +80,11 @@ $log(\hat{T}_{FB}(\theta_A)) =-0.01 \mathcal{G} + 0.08 \mathcal{D} - 0.85 log(\m
 
 For ResNet50:
 
-<img src="Figs/layer_wise_transferability.png" width = "1000" height = "300" alt="Layer-wise transferability" align=center />
+<img src="Figs/layer_wise_transferability.png" width = "1000" height = "300" alt="Layer-wise transferability resnet50" align=center />
 
+For DenseNet121 and ViT small:
+
+<img src="Figs/layer_wise_transferability_densenet_vit.png" width = "1000" height = "300" alt="Layer-wise transferability densenet vit" align=center />
 
 ## 5. Environment
 The code is developed with an Intel(R) Xeon(R) Silver 4210R CPU @ 2.40GHz and a single Nvidia Ampere A100 GPU.
