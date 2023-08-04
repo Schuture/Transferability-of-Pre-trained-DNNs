@@ -80,11 +80,11 @@ $log(\hat{T}_{FB}(\theta_A)) =-0.01 \mathcal{G} + 0.08 \mathcal{D} - 0.85 log(\m
 
 For ResNet50:
 
-<img src="Figs/layer_wise_transferability.png" width = "1000" height = "330" alt="Layer-wise transferability resnet50" align=center />
+<img src="Figs/layer_wise_transferability.png" width = "1000" height = "300" alt="Layer-wise transferability resnet50" align=center />
 
 For DenseNet121 and ViT small:
 
-<img src="Figs/layer_wise_transferability_densenet_vit.png" width = "1000" height = "180" alt="Layer-wise transferability densenet vit" align=center />
+<img src="Figs/layer_wise_transferability_densenet_vit.png" width = "1000" height = "160" alt="Layer-wise transferability densenet vit" align=center />
 
 ## 5. Environment
 The code is developed with an Intel(R) Xeon(R) Silver 4210R CPU @ 2.40GHz and a single Nvidia Ampere A100 GPU.
